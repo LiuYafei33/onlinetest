@@ -1,0 +1,87 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+        <link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        </style>
+        <link rel="stylesheet" href="../css/front/assets/index.css">
+        <link rel="stylesheet" href="../css/front/assets/list.css">
+        <link rel="stylesheet" href="../css/front/assets/recoad.css">
+    </head>
+    <body>
+       <@cmMacro.online_tab />
+    
+    <div class="main_content clearfix">
+        <div class="main_content clearfix">
+            <div class="le-prabg test-classificon-t clearfix clear">
+                <div class="navleft clearfix">
+                    <div class="tk-box clearfix">
+						<dl>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
+						</dl>
+						<dl>
+							<dt>我的题库</dt>
+							<dd class=""><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class="this"><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class=""><a href="${ctx}/front/account"><i class="myaccount"></i>账户安全</a></dd>
+						</dl>
+					</div>
+                </div>
+                <!--右侧中间部分-->
+                <div class="test-clawidth-more bor" id="class_frame">
+                    <div class="cap-chose bor f-mb20">
+                        <ul class="pracl-mlist">
+                            <li><a href="/tiku/history/187" class="this">练习记录</a></li>
+                        </ul>
+                    </div>
+                    <div class="pracl-dalist bor">
+                        <ul>
+                        <#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
+								<#list returnDatas.otherData as _data>
+								
+                            <li class="pdscon">
+                                <div class="pda-list">
+                                    <span class="dal-but" data-index="0">
+                                    <#if _data.status==1>
+                                    	<a href="${ctx}/front/result?recordId=${(_data.id)!''}" class="check cjx">查看解析</a>
+                                        <a href="${ctx}/front/testPaper?id=${(_data.paper_id)!'0'}">重新测试</a>
+                                    <#else>
+                                    	<a href="${ctx}/front/testPaper?id=${(_data.paper_id)!'0'}" class="check cjx">继续做题</a>
+                                    </#if>
+                                       
+                                    </span>
+                                    <div style="cursor: pointer;" data-index="0" class="parSpan">
+                                        <h3><span>[
+                                        <#if _data.status==1>
+                                        已交卷
+                                        <#else>
+                                        未交卷
+                                    	</#if>
+                                        ]</span>${(_data.paper_name)!''}</h3>
+                                        <p>
+                                            <span>${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}</span>
+                                            <span>用时：${(_data.used_time)!'0'} 秒</span>
+                                            <span>总分：${(_data.total_score)!'0'} 分</span>
+                                            <span class="green">得分：${(_data.right_score)!'0'}分</span>
+                                        </p>
+                                    </div>
+                                </div>
+                               </li>
+                              </#list>
+							</#if>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	<@cmMacro.footer />
+</body>
+</html>
+</#escape>

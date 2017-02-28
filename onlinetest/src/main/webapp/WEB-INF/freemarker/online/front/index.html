@@ -1,0 +1,58 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+		<link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+		<style>
+		#headerbox {
+			position: relative;
+		}
+		
+		.current{
+    		background-color: #f04800;
+    		color: #FFF;
+		}
+		</style>
+		<link rel="stylesheet" href="../css/front/assets/index.css">
+	</head>
+	<body>
+	<@cmMacro.online_tab />
+	
+	<div class="main_content clearfix">
+		<div class="main_content clearfix">
+			<div class="le-prabg test-classificon-t clearfix clear">
+				<div class="navleft clearfix">
+					<div class="tk-box clearfix">
+						<dl>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
+						</dl>
+						<dl>
+							<dt>我的题库</dt>
+							<dd class="this"><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class=""><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class=""><a href="${ctx}/front/account"><i class="myaccount"></i>账户安全</a></dd>
+						</dl>
+					</div>
+				</div>
+				<!--右侧中间部分-->
+				<div class="test-clawidth-more bor" id="class_frame">
+					<div class="clawidth-maincon clearfix">
+						<dl class="hot">
+							<dt><i> 科目分类</i></dt>
+							<#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
+								<#list returnDatas.otherData as _data>
+									<dd> <a href="${ctx}/front/testPaperList?subjects=${(_data.id)!'1'}" class="" data-name="cy" title="">${(_data.name)}</a> </dd>
+								</#list>
+							</#if>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<@cmMacro.footer />
+</body>
+</html>
+</#escape>
